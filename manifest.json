@@ -1,0 +1,15 @@
+{
+  "name": "Streak Secure Gmail",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "An extension to send secure, encrypted messages through Gmail.",
+  "icons": { "16": "resources/icon.png",
+           "48": "resources/icon.png",
+          "128": "resources/icon.png" },
+  "content_scripts": [
+    {
+      "matches": ["http://mail.google.com/*", "https://mail.google.com/*"],
+      "js": ["combined.js"]
+    }
+  ]
+}
