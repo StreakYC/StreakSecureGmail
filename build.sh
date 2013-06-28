@@ -1,8 +1,8 @@
 echo Starting Build...
 
 rm -rf build/*
-mkdir build/temp
-touch build/temp/combined.js
+mkdir build/unpacked
+touch build/unpacked/combined.js
 
 echo Create a combined javascript file...
 cat buildPaths.config | while read file
@@ -13,19 +13,16 @@ do
     	exit 1
 	fi
 
-	cat $file >> build/temp/combined.js
+	cat $file >> build/unpacked/combined.js
 done
 
 echo Copying over the resources folder
-cp -R resources build/temp
+cp -R resources build/unpacked
 
 echo Copying over manifest.json
-cp manifest.json build/temp
+cp manifest.json build/unpacked
 
 echo Creating chrome extension...
-zip -r -q build/webstore.zip build/temp/*
-
-echo Cleaning up...
-rm -rf build/temp
+zip -r -q build/webstore.zip build/unpacked/*
 
 echo Build Successful.
