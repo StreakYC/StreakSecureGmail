@@ -6,7 +6,7 @@ touch build/unpacked/combined.js
 
 echo Create a combined javascript file...
 cat buildPaths.config | while read file
-do 
+do
 	if [ ! -f $file ]; then
     	echo "File $file not found in filesystem, aborting..."
     	rm -rf build/*
@@ -19,8 +19,8 @@ done
 echo Copying over the resources folder
 cp -R resources build/unpacked
 
-echo Copying over manifest.json
-cp manifest.json build/unpacked
+echo Copying manifest
+cp manifest.json build/unpacked/
 
 echo Creating chrome extension...
 zip -r -q build/webstore.zip build/unpacked/*
