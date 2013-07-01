@@ -11,6 +11,10 @@
 					'<b>This message is encrypted.</b> ',
 					'<span class="G8gNXb h8 ou streak__decrypt" idlink="" tabindex="0">Decrypt message with password</span>',
 				'</div>',
+				'<div class="streak__hint" style="display:none; margin-left: 36px; padding-bottom: 7px; font-style: italic;">',
+					'Hint: ',
+					'<span class="streak__hintInner"></span>',
+				'</div>',
 			'</div>'
 		].join(""),
 		DECRYPTED_NOTICE_TEMPLATE: [
@@ -28,22 +32,35 @@
 
 		var body = emailMessage.find('.adP');
 		var noticeArea = emailMessage.find('.utdU2e');
+		var hint;
 
 		//are we encrypted?
 		var encryptSpan = body.find('[hspace=streakEncrypted]');
 
 		if(encryptSpan.length > 0){
 			noticeArea[0].innerHTML = CONSTANTS.ENCRYPTED_NOTICE_TEMPLATE;
+
+			var marker = body.find('[hspace=streakMarkerOuter]');
+			marker[0].innerHTML = ''; //don't need to show the link to download extension, since it's already installed
+
+			var hintSpan = body.find('[hspace=streakHint]');
+			if(hintSpan.length > 0){
+				hint = body.find('[hspace=streakHintInner]')[0].textContent;
+				hintSpan[0].innerHTML = ''; //clear it out
+
+				var noticeHint = noticeArea.find('.streak__hint');
+				noticeHint.show('block');
+				noticeHint.find('.streak__hintInner')[0].innerText = hint;
+			}
+
 			var decrypt = noticeArea.find('.streak__decrypt');
 			decrypt.onClick(function(e){
-				askForPasswordAndDecrypt(body, emailMessage);
+				askForPasswordAndDecrypt(body, emailMessage, hint);
 			});
 		}
 	});
 
-	function askForPasswordAndDecrypt(body, emailMessage){
-		var hintSpan = body.find('[hspace=streakHint]');
-
+	function askForPasswordAndDecrypt(body, emailMessage, hint){
 		var modal = StreakSecureGmail.Widgets.Modal.show('Decrypt Message');
 
 		var inner = modal.find('.inner');
@@ -55,10 +72,10 @@
 			'<div class="streak__error" style="display:none;">Wrong password</div>'
 		];
 
-		if(hintSpan.length > 0){
+		if(hint && hint.length > 0){
 			innerHTML = innerHTML.concat([
 				'<div class="xy">Password Hint:</div>',
-				'<div>' + hintSpace[0].textContent + '</div>'
+				'<div>' + hint + '</div>'
 			]);
 		}
 		inner[0].innerHTML = innerHTML.join("");

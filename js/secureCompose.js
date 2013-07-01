@@ -196,12 +196,12 @@
 
 		bodyText = [
 			'<div style="font-weight: bold;">',
-			'<span hspace="streakMarkerOuter"></span>',
+			'<span hspace="streakMarkerOuter">',
 			'This message is encrypted from the sender, get the ',
 			'<a href="https://www.streak.com/secureGmail">',
 				'Secure Streak Gmail extension',
 			'</a> ',
-			'to decrypt it.</div>',
+			'to decrypt it.</span></div>',
 			'<br />',
 			'<span hspace="streakEncrypted">',
 			btoa(sjcl.encrypt(password, '<span hspace="streakMarkerInner"></span>' + bodyText)),
@@ -212,9 +212,11 @@
 			bodyText = bodyText.concat([
 				'<br />',
 				'<br />',
-				'<emph style="font-weight:bold;font-style: italic;">Hint: </emph>',
 				'<span hspace="streakHint" class="font-style: italic;">',
+				'<emph style="font-weight:bold;font-style: italic;">Hint: </emph>',
+				'<span hspace="streakHintInner">',
 				hint,
+				'</span>',
 				'</span>'
 			]);
 		}
