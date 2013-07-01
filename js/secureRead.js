@@ -51,7 +51,8 @@
 
 		var innerHTML = [
 			'<div class="xy">Decryption Password:</div>',
-			'<input type="text" class="streak__password" value="" placeholder="This is the password that the sender used to secure the message">'
+			'<input type="text" class="streak__password" value="" placeholder="This is the password that the sender used to secure the message">',
+			'<div class="streak__error" style="display:none;">Wrong password</div>'
 		];
 
 		if(hintSpan.length > 0){
@@ -63,6 +64,7 @@
 		inner[0].innerHTML = innerHTML.join("");
 
 		var passwordInput = inner.find(".streak__password");
+		var error = inner.find('.streak__error');
 
 		var decrypt = Gmail.createButton(
 			"Decrypt",
@@ -70,7 +72,12 @@
 				var password = passwordInput[0].value;
 
 				if(password && password.length > 0){
-					decryptContent(password, body, emailMessage);
+					try{
+						decryptContent(password, body, emailMessage);
+					}
+					catch(err){
+						error.show('block');
+					}
 				}
 			}
 		);
@@ -83,7 +90,7 @@
 	function decryptContent(password, body, emailMessage){
 		var encryptSpan = body.find('[hspace=streakEncrypted]');
 
-		var text = StreakSecureGmail.sjcl.decrypt(password, atob(encryptSpan[0].textContent));
+		var text = sjcl.decrypt(password, atob(encryptSpan[0].textContent));
 
 		if(text.indexOf('hspace="streakMarkerInner"') > -1){
 			body[0].innerHTML = text;

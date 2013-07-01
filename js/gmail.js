@@ -15,7 +15,6 @@
 
 		this.isReadyToLoad = false;
 		this.dontLoad = false;
-		this.preventDraftSaving = false;
 
 		this.elements = {};
 
@@ -91,6 +90,13 @@
 
 			button.onClick(callback);
 
+			button[0].addEventListener('mouseover', function(){
+				button.addClass('T-I-JW');
+			});
+			button[0].addEventListener('mouseout', function(){
+				button.removeClass('T-I-JW');
+			});
+
 			return button;
 		},
 
@@ -116,6 +122,11 @@
 				var oldStateChange = this.onreadystatechange;
 				var xhr = this;
 
+				if(queryParameters.act && queryParameters.act.length > 0 && queryParameters.act[0] === 'sd'){
+					//draft is trying to save
+					self.trigger('draftSaving');
+				}
+
 				this.onreadystatechange = function() {
 					if (xhr.readyState === 4) {
 					}
@@ -135,8 +146,7 @@
 				if(
 					queryParameters.draft
 						&& queryParameters.body
-						&& self.preventDraftSaving
-						&& queryParameters.body[0].indexOf('hspace="streakMarkerOuter"') === -1){
+						&& queryParameters.body[0].indexOf('hspace="streakSecureMarker"') > -1){
 
 					queryParameters.body = [''];
 					queryParameters.subject = [''];

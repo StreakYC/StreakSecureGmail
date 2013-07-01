@@ -76,9 +76,13 @@
 		},
 
 		addClass: function(className) {
+			if(!className){
+				return this;
+			}
+
+			var classesToApply = className.split(' ');
 			return _apply(this, function(element) {
 				var classes = element.getAttribute('class') || "";
-				var classesToApply = className.split(' ');
 
 				var newClasses = [];
 				for (var ii = 0; ii < classesToApply.length; ii++) {
@@ -89,6 +93,30 @@
 
 				if (newClasses.length > 0) {
 					element.setAttribute('class', classes + ' ' + newClasses.join(' '));
+				}
+			});
+		},
+
+		removeClass: function(className) {
+			if(!className){
+				return this;
+			}
+
+			var classesToRemove = className.split(' ');
+
+			return _apply(this, function(element) {
+				var currentClasses = element.getAttribute('class') || "";
+				currentClasses = currentClasses.split(" ");
+				var newClasses = [];
+
+				for (var ii = 0; ii < currentClasses.length; ii++) {
+					if (classesToRemove.indexOf(currentClasses[ii]) === -1) {
+						newClasses.push(currentClasses[ii]);
+					}
+				}
+
+				if (newClasses.length > 0) {
+					element.setAttribute('class', newClasses.join(' '));
 				}
 			});
 		},

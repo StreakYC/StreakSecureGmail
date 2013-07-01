@@ -67,6 +67,8 @@
 		css.insertRule('.streak__overlay {position: fixed; top: 0px; bottom: 0px; left: 0px; right:0px; z-index: 100');
 		css.insertRule('.streak__overlayInner {position: absolute; top:0px; bottom:0px; left: 0px; right:0px; background-color: white; opacity: 0.75;');
 		css.insertRule('.streak__modal .Kj-JD {margin-left: auto; margin-right: auto; position: relative; -webkit-align-self: center;');
+		css.insertRule('.streak__modal .streak__error {margin-top: 20px; color: red;}');
+		css.insertRule('.streak__modal .streak__extraHint {color: #666; font-size: 85%}');
 
 		Gmail.elements.body.append(overlay[0]);
 	});
