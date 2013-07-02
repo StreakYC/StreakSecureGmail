@@ -198,7 +198,7 @@
 			'<div style="font-weight: bold;">',
 			'<span hspace="streakMarkerOuter">',
 			'This message is encrypted from the sender, get the ',
-			'<a href="https://www.streak.com/secureGmail">',
+			'<a href="https://www.streak.com/securegmail">',
 				'Secure Streak Gmail extension',
 			'</a> ',
 			'to decrypt it.</span></div>',

@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "Secure Gmail by Streak",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "An extension to send secure, encrypted messages through Gmail.", 
+    "description":"The description of the application, displayed in the web store."
+  }
+}

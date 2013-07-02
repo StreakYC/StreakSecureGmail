@@ -19,6 +19,9 @@ done
 echo Copying over the resources folder
 cp -R resources build/unpacked
 
+echo Copying over the _locales folder
+cp -R _locales build/unpacked
+
 echo Copying manifest
 cp manifest.json build/unpacked/
 
