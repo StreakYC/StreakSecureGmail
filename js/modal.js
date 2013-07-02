@@ -56,7 +56,7 @@
 		css.insertRule('.buttonArea .bbButton:last-child {margin-right: 0px;}');
 		css.insertRule('.Kj-JD {max-height: 600px;}');
 		css.insertRule('.Kj-JD .inner {padding-bottom: 1px;}');
-		css.insertRule('.Kj-JD .inner input[type=text] {width: 100%;}');
+		css.insertRule('.Kj-JD .inner input {width: 100%;}');
 		css.insertRule('.Kj-JD .xy {margin-top: 10px;}');
 		css.insertRule('.Kj-JD div.inputFieldWrapper {padding-right:4px;padding-left:1px;margin-right:2px}');
 		css.insertRule('.streak__overlayModal {width: 100%; height: 100%;}');

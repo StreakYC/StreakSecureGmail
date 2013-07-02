@@ -73,7 +73,7 @@
 
 		var innerHTML = [
 			'<div class="xy">Decryption Password:</div>',
-			'<input type="text" class="streak__password" value="" placeholder="This is the password that the sender used to secure the message">',
+			'<input type="password" class="streak__password" value="" placeholder="This is the password that the sender used to secure the message">',
 			'<div class="streak__error" style="display:none;">Wrong password</div>'
 		];
 
@@ -103,6 +103,12 @@
 				}
 			}
 		);
+
+		passwordInput[0].addEventListener('keydown', function(e){
+			if(e.which === 13){ //enter
+				decrypt.click();
+			}
+		});
 
 		buttonArea.append(decrypt[0]);
 

@@ -162,7 +162,7 @@
 
 		inner[0].innerHTML = [
 			'<div class="xy">Encryption Password:</div>',
-			'<input type="text" class="streak__password" value="">',
+			'<input type="password" class="streak__password" value="">',
 			'<div class="streak__extraHint">This is the password that the recipient(s) will have to use to view the secure message</div>',
 			'<div class="xy">Password Hint (Optional):</div>',
 			'<input type="text" class="streak__hint" value="">',
@@ -184,6 +184,18 @@
 				}
 			}
 		);
+
+		passwordInput[0].addEventListener('keydown', function(e){
+			if(e.which === 13){ //enter
+				encryptAndSend.click();
+			}
+		});
+
+		hintInput[0].addEventListener('keydown', function(e){
+			if(e.which === 13){
+				encryptAndSend.click();
+			}
+		});
 
 		buttonArea.append(encryptAndSend[0]);
 
