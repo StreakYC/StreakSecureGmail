@@ -37,6 +37,11 @@
 		//are we encrypted?
 		var encryptSpan = body.find('[hspace=streakEncrypted]');
 
+		//let's make sure it's not in a gmail quote
+		if(encryptSpan.parents().filter('.gmail_quote').length > 0){
+			return;
+		}
+
 		if(encryptSpan.length > 0){
 			noticeArea[0].innerHTML = CONSTANTS.ENCRYPTED_NOTICE_TEMPLATE;
 

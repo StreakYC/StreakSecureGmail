@@ -197,6 +197,27 @@
 			});
 		},
 
+		parents: function(){
+			var ret = [];
+			if(this.length > 0){
+				var element = this[0];
+				var parentNode = element.parentNode;
+				var parentElement = element.parentElement;
+
+				for (var ii = 0; ii < 1000; ii++) {
+					if (!parentElement) {
+						break;
+					}
+
+					ret.push(parentNode);
+					parentNode = parentNode.parentNode;
+					parentElement = parentElement.parentElement;
+				}
+			}
+
+			return lightQuery(ret);
+		},
+
 		isInBody: function(){
 			return _question(this, function(element) {
 				var parentNode = element.parentNode;
@@ -208,10 +229,6 @@
 					}
 
 					if (!parentNode && !parentElement) {
-						return false;
-					}
-
-					if (parentElement.style.display === 'none') {
 						return false;
 					}
 
