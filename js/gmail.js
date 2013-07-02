@@ -85,7 +85,7 @@
 		createButton: function(text, callback){
 			var button = $(document.createElement('div'));
 			button.addClass('T-I J-J5-Ji aoO T-I-atl L3 T-I-JO');
-			button[0].setAttribute('tabindex', 1);
+			button[0].setAttribute('tabindex', 0);
 			button[0].innerHTML = text;
 
 			button.onClick(callback);
@@ -95,6 +95,12 @@
 			});
 			button[0].addEventListener('mouseout', function(){
 				button.removeClass('T-I-JW');
+			});
+
+			button[0].addEventListener('keydown', function(e){
+				if(e.which === 13){ //Eventer
+					button.click();
+				}
 			});
 
 			return button;

@@ -73,7 +73,8 @@
 
 		var innerHTML = [
 			'<div class="xy">Decryption Password:</div>',
-			'<input type="password" class="streak__password" value="" placeholder="This is the password that the sender used to secure the message">',
+			'<input type="password" class="streak__password" value="">',
+			'<div class="streak__extraHint">This is the password that the sender used to secure the message</div>',
 			'<div class="streak__error" style="display:none;">Wrong password</div>'
 		];
 
