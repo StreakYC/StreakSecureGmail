@@ -114,27 +114,23 @@
 			var win = top.document.getElementById('js_frame').contentDocument.defaultView;
 			var xmlProto = win.XMLHttpRequest.prototype;
 
+
 			xmlProto._gmail_open = xmlProto.open;
 			xmlProto.open = function(method, url, async, user, password) {
-				var out = xmlProto._gmail_open.apply(this, arguments);
+				var out = xmlProto._gmail_open.apply(this, _.toArray(arguments));
 
-				var queryParameters = self._extractQueryParameters(url);
-				var oldStateChange = this.onreadystatechange;
-				var xhr = this;
-
-				if(queryParameters.act && queryParameters.act.length > 0 && queryParameters.act[0] === 'sd'){
-					//draft is trying to save
-					self.trigger('draftSaving');
+				if(url){
+					try{
+						var queryParameters = self._extractQueryParameters(url);
+						if(queryParameters.act && queryParameters.act.length > 0 && queryParameters.act[0] === 'sd'){
+							//draft is trying to save
+							self.trigger('draftSaving');
+						}
+					}
+					catch(err){
+						console.log(err);
+					}
 				}
-
-				this.onreadystatechange = function() {
-					if (xhr.readyState === 4) {
-					}
-
-					if(oldStateChange){
-						oldStateChange.call(xhr);
-					}
-				};
 
 				return out;
 			};
@@ -142,6 +138,7 @@
 			xmlProto._gmail_send = xmlProto.send;
 			xmlProto.send = function(body) {
 				var queryParameters = self._extractQueryParameters("?" + body);
+				var out;
 
 				if(
 					queryParameters.draft
@@ -151,16 +148,10 @@
 					queryParameters.body = [''];
 					queryParameters.subject = [''];
 					queryParameters.subjectbox = [''];
+					out = xmlProto._gmail_send.apply(this, [self._encodeQueryParameters(queryParameters)]);
 				}
-
-				var out = xmlProto._gmail_send.apply(this, [self._encodeQueryParameters(queryParameters)]);
-				try {
-					if (body) {
-
-					}
-				}
-				catch (err) {
-					//do nothing
+				else{
+					out = xmlProto._gmail_send.apply(this, _.toArray(arguments));
 				}
 
 				return out;
