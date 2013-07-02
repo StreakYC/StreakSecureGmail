@@ -19,6 +19,6 @@
   ],
 
   "web_accessible_resources": [
-    "combined.js"
+    "combined.js", "blank.png"
   ]
 }
