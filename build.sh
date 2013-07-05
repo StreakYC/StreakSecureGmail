@@ -1,6 +1,7 @@
 echo Starting Build...
 
 rm -rf build/*
+mkdir -p build
 mkdir build/unpacked
 touch build/unpacked/combined.js
 
