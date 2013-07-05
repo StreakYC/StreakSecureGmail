@@ -55,7 +55,7 @@
 
 				var noticeHint = noticeArea.find('.streak__hint');
 				noticeHint.show('block');
-				noticeHint.find('.streak__hintInner')[0].innerText = hint;
+				noticeHint.find('.streak__hintInner')[0].textContent = hint;
 			}
 
 			var decrypt = noticeArea.find('.streak__decrypt');
@@ -81,10 +81,12 @@
 		if(hint && hint.length > 0){
 			innerHTML = innerHTML.concat([
 				'<div class="xy">Password Hint:</div>',
-				'<div>' + hint + '</div>'
+				'<div class="modal__hint"></div>'
 			]);
 		}
 		inner[0].innerHTML = innerHTML.join("");
+
+		inner.find('.modal__hint')[0].textContent = hint;
 
 		var passwordInput = inner.find(".streak__password");
 		var error = inner.find('.streak__error');
@@ -122,7 +124,8 @@
 		var text = sjcl.decrypt(password, atob(encryptSpan[0].textContent));
 
 		if(text.indexOf('hspace="streakMarkerInner"') > -1){
-			body[0].innerHTML = text;
+			body[0].innerHTML = '';
+			body[0].textContent = text;
 			emailMessage.find('.utdU2e')[0].innerHTML = CONSTANTS.DECRYPTED_NOTICE_TEMPLATE;
 			StreakSecureGmail.Widgets.Modal.close();
 		}
