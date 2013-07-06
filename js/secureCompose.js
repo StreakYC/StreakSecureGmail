@@ -204,7 +204,7 @@
 
 	function encryptEmailAndSend(password, hint, compose, currentSend){
 		var body = compose.find('.Ap [contenteditable=true]');
-		var bodyText = body[0].innerHTML;
+		var bodyText = body[0].innerText;
 
 		bodyText = [
 			'<div style="font-weight: bold;">',

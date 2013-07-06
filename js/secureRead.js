@@ -86,7 +86,9 @@
 		}
 		inner[0].innerHTML = innerHTML.join("");
 
-		inner.find('.modal__hint')[0].textContent = hint;
+		if(hint && hint.length > 0){
+			inner.find('.modal__hint')[0].textContent = hint;
+		}
 
 		var passwordInput = inner.find(".streak__password");
 		var error = inner.find('.streak__error');
@@ -124,11 +126,47 @@
 		var text = sjcl.decrypt(password, atob(encryptSpan[0].textContent));
 
 		if(text.indexOf('hspace="streakMarkerInner"') > -1){
-			body[0].innerHTML = '';
-			body[0].textContent = text;
+			body[0].innerHTML = getTextHTML(stripTags(text));
 			emailMessage.find('.utdU2e')[0].innerHTML = CONSTANTS.DECRYPTED_NOTICE_TEMPLATE;
 			StreakSecureGmail.Widgets.Modal.close();
 		}
+	}
+
+	// credit stackoverflow http://stackoverflow.com/a/5047731
+	var charEncodings = {
+		'\t': '&nbsp;&nbsp;&nbsp;&nbsp;',
+		'  ': '&nbsp; ',
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'\n': '<br />',
+		'\r': '<br />'
+	};
+	var space = /[\t ]/;
+	var noWidthSpace = '&#8203;';
+
+	function getTextHTML(text) {
+		text = (text || '') + ''; // make sure it's a string
+		//text = text.escapeHTML();
+		text = text.replace(/\r\n/g, '\n'); // avoid adding two <br /> tags
+		var html = '';
+		var lastChar = '';
+
+		for (var i = 0; i < text.length; i++) {
+			var c = text[i];
+			var charCode = text.charCodeAt(i);
+			if (space.test(c) && !space.test(lastChar) && space.test(text[i + 1] || '')) {
+				html += noWidthSpace;
+			}
+			html += c in charEncodings ? charEncodings[c] : charCode > 127 ? '&#' + charCode + ';' : c;
+			lastChar = c;
+		}
+
+		return html;
+	}
+
+	function stripTags(text){
+		return text.replace(/<\/?[^<>]*>/gi, '');
 	}
 
 })(StreakSecureGmail);
