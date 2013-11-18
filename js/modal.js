@@ -52,23 +52,23 @@
 	Gmail.ready(function(){
 		var css = StreakSecureGmail.document.styleSheets[0];
 
-		css.insertRule('.buttonArea {text-align: right;}');
-		css.insertRule('.buttonArea .bbButton:last-child {margin-right: 0px;}');
-		css.insertRule('.Kj-JD {max-height: 600px;}');
-		css.insertRule('.Kj-JD .inner {padding-bottom: 1px;}');
-		css.insertRule('.Kj-JD .inner input {width: 100%;}');
-		css.insertRule('.Kj-JD .xy {margin-top: 10px;}');
-		css.insertRule('.Kj-JD div.inputFieldWrapper {padding-right:4px;padding-left:1px;margin-right:2px}');
-		css.insertRule('.streak__overlayModal {width: 100%; height: 100%;}');
-		css.insertRule('.streak__modal {width: 100%; height:100%; display:-webkit-flex;}');
-		css.insertRule('.streak__modal .xy {font-weight: bold;}');
-		css.insertRule('.streak__modal .close {cursor: pointer;}');
-		css.insertRule('.streak__modal h3 { margin-top: 10px; margin-bottom:5px; }');
-		css.insertRule('.streak__overlay {position: fixed; top: 0px; bottom: 0px; left: 0px; right:0px; z-index: 100}');
-		css.insertRule('.streak__overlayInner {position: absolute; top:0px; bottom:0px; left: 0px; right:0px; background-color: white; opacity: 0.75;}');
-		css.insertRule('.streak__modal .Kj-JD {margin-left: auto; margin-right: auto; position: relative; -webkit-align-self: center;}');
-		css.insertRule('.streak__modal .streak__error {margin-top: 20px; color: red;}');
-		css.insertRule('.streak__modal .streak__extraHint {color: #666; font-size: 85%}');
+		css.insertRule('.buttonArea {text-align: right;}', 0);
+		css.insertRule('.buttonArea .bbButton:last-child {margin-right: 0px;}', 0);
+		css.insertRule('.Kj-JD {max-height: 600px;}', 0);
+		css.insertRule('.Kj-JD .inner {padding-bottom: 1px;}', 0);
+		css.insertRule('.Kj-JD .inner input {width: 100%;}', 0);
+		css.insertRule('.Kj-JD .xy {margin-top: 10px;}', 0);
+		css.insertRule('.Kj-JD div.inputFieldWrapper {padding-right:4px;padding-left:1px;margin-right:2px}', 0);
+		css.insertRule('.streak__overlayModal {width: 100%; height: 100%;}', 0);
+		css.insertRule('.streak__modal {width: 100%; height:100%; display:-webkit-flex;}', 0);
+		css.insertRule('.streak__modal .xy {font-weight: bold;}', 0);
+		css.insertRule('.streak__modal .close {cursor: pointer;}', 0);
+		css.insertRule('.streak__modal h3 { margin-top: 10px; margin-bottom:5px; }', 0);
+		css.insertRule('.streak__overlay {position: fixed; top: 0px; bottom: 0px; left: 0px; right:0px; z-index: 100}', 0);
+		css.insertRule('.streak__overlayInner {position: absolute; top:0px; bottom:0px; left: 0px; right:0px; background-color: white; opacity: 0.75;}', 0);
+		css.insertRule('.streak__modal .Kj-JD {margin-left: auto; margin-right: auto; position: relative; -webkit-align-self: center;}', 0);
+		css.insertRule('.streak__modal .streak__error {margin-top: 20px; color: red;}', 0);
+		css.insertRule('.streak__modal .streak__extraHint {color: #666; font-size: 85%}', 0);
 
 		Gmail.elements.body.append(overlay[0]);
 	});

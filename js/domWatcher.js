@@ -52,10 +52,11 @@
 					'from { clip: rect(1px, auto, auto, auto); }',
 					' to { clip: rect(0px, auto, auto, auto); }',
 					'}'
-				].join('')
+				].join(''),
+				0
 			);
 
-			css.insertRule(getAnimationCSSString(selector, animationName));
+			css.insertRule(getAnimationCSSString(selector, animationName), 0);
 
 			var callbacks = [];
 			self.watchedSelectors[selector] = {
@@ -79,7 +80,8 @@
 					'from { clip: rect(auto, 1px, auto, auto); }',
 					' to { clip: rect(auto, 0px, auto, auto); }',
 					'}'
-				].join('')
+				].join(''),
+				0
 			);
 			css.insertRule(getAnimationCSSString(initialSelector, animationNameInitial));
 
@@ -89,9 +91,10 @@
 					'from { clip: rect(auto, 0px, auto, auto); }',
 					' to { clip: rect(auto, 1px, auto, auto); }',
 					'}'
-				].join('')
+				].join(''),
+				0
 			);
-			css.insertRule(getAnimationCSSString(changeSelector, animationNameChange));
+			css.insertRule(getAnimationCSSString(changeSelector, animationNameChange), 0);
 
 
 			self.animationCallbacks[animationNameInitial] = [callback];
