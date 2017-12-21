@@ -30,7 +30,7 @@
 	Gmail.bind('emailMessageLoaded', function(inEmailMessage){
 		var emailMessage = $(inEmailMessage);
 
-		var body = emailMessage.find('.adP');
+		var body = emailMessage.find('.ii.gt');
 		var noticeArea = emailMessage.find('.utdU2e');
 		var hint;
 
