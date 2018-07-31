@@ -6,11 +6,84 @@
   2) Injects the scripts necessary to load the Gmail API into the Gmail script environment.
 */
 
-if (top.document == document) { // Only run this script in the top-most frame (there are multiple frames in Gmail)
-	// Loads a script
-    var headID = document.getElementsByTagName('head')[0];
-    var newScript = document.createElement('script');
-    newScript.type = 'text/javascript';
-    newScript.src = chrome.extension.getURL('combined.js');
-    headID.appendChild(newScript);
+if (top.document == document) {
+  // Only run this script in the top-most frame (there are multiple frames in Gmail)
+  // Loads a script
+  var headID = document.getElementsByTagName("head")[0];
+  var newScript = document.createElement("script");
+  newScript.type = "text/javascript";
+  newScript.src = chrome.extension.getURL("combined.js");
+  headID.appendChild(newScript);
 }
+
+const makelink = function(text, url) {
+  var a = document.createElement("a");
+  a.appendChild(document.createTextNode(text));
+  a.title = text;
+  a.href = url;
+  return a;
+}
+
+const hasModelBeenClosedKey = "StreakSecureGmail.hasClosedDeprecatedModal";
+
+InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
+
+  const track = (eventName, extraProps = {}) => {
+    sdk.Logger.event("secureGmail." + eventName, extraProps);
+  }
+
+  const inboxSDK = await Gmail.inboxSDKPromise;
+  track("extensionLoaded")
+  
+  if(!!sessionStorage.getItem(hasModelBeenClosedKey)) {
+    return
+  }
+  // Log user being shown deprecation modal (a most-likely unique user email)
+  track("deprecationModalPresented")
+
+  var div = document.createElement("div");
+  div.style.width = '400px';
+  div.style.whiteSpace = 'pre-wrap';
+
+  const content1 = document.createTextNode("On August 15, 2018, the Secure Gmail Chrome extension will be discontinued and no longer available to download.\n\nSince Gmail recently launched a similar tool feature called ");
+  div.appendChild(content1)
+  const link1 = makelink("Confidential Mode", "https://support.google.com/mail/answer/7674059");
+  div.appendChild(link1);
+  const content2 = document.createTextNode(", there’s been less of a need for our extension.  We highly encourage you to transition to this new Gmail feature as soon as possible to ensure you can continue sending confidential emails. You should also ");
+  div.appendChild(content2);
+  const link2 = makelink("uninstall", "https://support.google.com/chrome_webstore/answer/2664769");
+  div.appendChild(link2);
+  const content3 = document.createTextNode(" the Secure Gmail extension.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
+  div.appendChild(content3);
+  const link3 = makelink("Streak CRM for Gmail", "http://www.streak.com");
+  div.appendChild(link3);
+  const content4 = document.createTextNode(". It offers workflow management but also power tools like email tracking, scheduled emails, and mail merge all from within Gmail.");
+  div.appendChild(content4);
+
+  sdk.Widgets.showModalView({
+    el: div,
+    chrome: false,
+    title: 'Secure Gmail Deprecated',
+    buttons: [
+      {
+        type: "PRIMARY_ACTION",
+        text: "Try Streak for Free",
+        onClick: function(e) {
+          window.open(
+            "http://www.streak.com?utm_medium=gmail&utm_source=inboxsdk&utm_campaign=inappmodal"
+          );
+        },
+        orderHint: 5
+      },
+      {
+        type: "SECONDARY_BUTTON",
+        text: "Close",
+        onClick: function(e) {
+          sessionStorage.setItem(hasModelBeenClosedKey, true);
+          e.modalView.close();
+        },
+        orderHint: 5
+      }
+    ]
+  });
+});
