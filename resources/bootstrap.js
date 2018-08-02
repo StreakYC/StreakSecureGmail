@@ -29,17 +29,18 @@ const hasModelBeenClosedKey = "StreakSecureGmail.hasClosedDeprecatedModal";
 InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
 
   const track = (eventName, extraProps = {}) => {
-    sdk.Logger.event("secureGmail." + eventName, extraProps);
+    sdk.Logger.event("secureGmail." + eventName, {
+      ...extraProps,
+      email: sdk.User.getEmailAddress()
+    })
   }
-
-  const inboxSDK = await Gmail.inboxSDKPromise;
-  track("extensionLoaded")
+ 
+  track("extensionLoaded");
   
   if(!!sessionStorage.getItem(hasModelBeenClosedKey)) {
     return
   }
   // Log user being shown deprecation modal (a most-likely unique user email)
-  track("deprecationModalPresented")
 
   var div = document.createElement("div");
   div.style.width = '400px';
@@ -60,15 +61,17 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   const content4 = document.createTextNode(". It offers workflow management but also power tools like email tracking, scheduled emails, and mail merge all from within Gmail.");
   div.appendChild(content4);
 
-  sdk.Widgets.showModalView({
+  const modalView = sdk.Widgets.showModalView({
     el: div,
-    chrome: false,
+    chrome: true,
     title: 'Secure Gmail Deprecated',
     buttons: [
       {
         type: "PRIMARY_ACTION",
+        color: "blue",
         text: "Try Streak for Free",
         onClick: function(e) {
+          track("deprecationModal.linkClicked");
           window.open(
             "http://www.streak.com?utm_medium=gmail&utm_source=inboxsdk&utm_campaign=inappmodal"
           );
@@ -76,7 +79,6 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
         orderHint: 5
       },
       {
-        type: "SECONDARY_BUTTON",
         text: "Close",
         onClick: function(e) {
           sessionStorage.setItem(hasModelBeenClosedKey, true);
@@ -85,5 +87,10 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
         orderHint: 5
       }
     ]
+  });
+
+  modalView.on('destroy', () => {
+    sessionStorage.setItem(hasModelBeenClosedKey, true);
+      track("deprecationModal.closed");
   });
 });
