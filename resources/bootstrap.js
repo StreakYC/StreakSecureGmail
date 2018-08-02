@@ -24,7 +24,7 @@ const makelink = function(text, url) {
   return a;
 }
 
-const hasModelBeenClosedKey = "StreakSecureGmail.hasClosedDeprecatedModal";
+const HASMODELBEENCLOSEDKEY = "StreakSecureGmail.hasClosedDeprecatedModal";
 
 InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
 
@@ -37,7 +37,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
  
   track("extensionLoaded");
   
-  if(!!sessionStorage.getItem(hasModelBeenClosedKey)) {
+  if(!!sessionStorage.getItem(HASMODELBEENCLOSEDKEY)) {
     return
   }
   // Log user being shown deprecation modal (a most-likely unique user email)
@@ -63,7 +63,6 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
 
   const modalView = sdk.Widgets.showModalView({
     el: div,
-    chrome: true,
     title: 'Secure Gmail Deprecated',
     buttons: [
       {
@@ -76,21 +75,18 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
             "http://www.streak.com?utm_medium=gmail&utm_source=inboxsdk&utm_campaign=inappmodal"
           );
         },
-        orderHint: 5
       },
       {
-        text: "Close",
+        text: "No, take me back to Gmail",
         onClick: function(e) {
-          sessionStorage.setItem(hasModelBeenClosedKey, true);
+          sessionStorage.setItem(HASMODELBEENCLOSEDKEY, true);
           e.modalView.close();
         },
-        orderHint: 5
       }
     ]
   });
 
   modalView.on('destroy', () => {
-    sessionStorage.setItem(hasModelBeenClosedKey, true);
-      track("deprecationModal.closed");
+    track("deprecationModal.closed");
   });
 });
