@@ -46,7 +46,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   div.style.width = '400px';
   div.style.whiteSpace = 'pre-wrap';
 
-  const content1 = document.createTextNode("On August 15, 2018, the Secure Gmail Chrome extension will be discontinued and no longer available to download.\n\nSince Gmail recently launched a similar tool feature called ");
+  const content1 = document.createTextNode("On August 15, 2018, the Secure Gmail Chrome extension will be discontinued and no longer available to download.\n\nSince Gmail recently launched a similar feature called ");
   div.appendChild(content1)
   const link1 = makelink("Confidential Mode", "https://support.google.com/mail/answer/7674059");
   div.appendChild(link1);
