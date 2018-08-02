@@ -56,7 +56,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   div.appendChild(link2);
   const content3 = document.createTextNode(" the Secure Gmail extension.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
   div.appendChild(content3);
-  const link3 = makelink("Streak CRM for Gmail", "http://www.streak.com");
+  const link3 = makelink("Streak CRM for Gmail", "https://www.streak.com");
   div.appendChild(link3);
   const content4 = document.createTextNode(". It offers workflow management but also power tools like email tracking, scheduled emails, and mail merge all from within Gmail.");
   div.appendChild(content4);
