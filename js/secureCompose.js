@@ -12,6 +12,7 @@
 	var _secureComposeWindows = [];
 
 	Gmail.ready(function(){
+		return; // 8.21.18: We are preventing all encrpytion so that only decryption may continue going forward.
 		var compose = $('[gh=cm]');
 		var composeParent = compose[0].parentNode;
 
