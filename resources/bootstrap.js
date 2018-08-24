@@ -38,7 +38,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   track("extensionLoaded");
   
   if(!!sessionStorage.getItem(HASMODELBEENCLOSEDKEY)) {
-    return
+    track("deprecationModal.showingDespiteCookie")
   }
   // Log user being shown deprecation modal (a most-likely unique user email)
 
