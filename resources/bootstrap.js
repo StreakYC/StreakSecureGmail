@@ -38,7 +38,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   track("extensionLoaded");
   
   if(!!sessionStorage.getItem(HASMODELBEENCLOSEDKEY)) {
-    return
+    track("deprecationModal.showingDespiteCookie")
   }
   // Log user being shown deprecation modal (a most-likely unique user email)
 
@@ -46,7 +46,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   div.style.width = '400px';
   div.style.whiteSpace = 'pre-wrap';
 
-  const content1 = document.createTextNode("On August 15, 2018, the Secure Gmail Chrome extension will be discontinued and no longer available to download.\n\nSince Gmail recently launched a similar tool feature called ");
+  const content1 = document.createTextNode("On August 31, 2018, the Secure Gmail Chrome extension will be discontinued and no longer available to download.\n\nSince Gmail recently launched a similar feature called ");
   div.appendChild(content1)
   const link1 = makelink("Confidential Mode", "https://support.google.com/mail/answer/7674059");
   div.appendChild(link1);
@@ -54,7 +54,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   div.appendChild(content2);
   const link2 = makelink("uninstall", "https://support.google.com/chrome_webstore/answer/2664769");
   div.appendChild(link2);
-  const content3 = document.createTextNode(" the Secure Gmail extension.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
+  const content3 = document.createTextNode(" the Secure Gmail extension, which will only offer decryption support from now on.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
   div.appendChild(content3);
   const link3 = makelink("Streak CRM for Gmail", "https://www.streak.com");
   div.appendChild(link3);
