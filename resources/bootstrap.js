@@ -54,7 +54,7 @@ InboxSDK.load(2, "sdk_StreakSecureGma_b14155ddf3").then(function(sdk) {
   div.appendChild(content2);
   const link2 = makelink("uninstall", "https://support.google.com/chrome_webstore/answer/2664769");
   div.appendChild(link2);
-  const content3 = document.createTextNode(" the Secure Gmail extension.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
+  const content3 = document.createTextNode(" the Secure Gmail extension, which will only offer decryption support from now on.\n\nLooking forward, the Streak team will continue to focus on improving our core product - the ");
   div.appendChild(content3);
   const link3 = makelink("Streak CRM for Gmail", "https://www.streak.com");
   div.appendChild(link3);
