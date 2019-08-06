@@ -17,7 +17,7 @@ If you find yourself needing to access a previously-encrypted message and no lon
 5. Turn on Developer Mode by toggling Developer Mode on in the top right of the settings page:
 ![](https://user-images.githubusercontent.com/12823489/62582770-60b08e00-b862-11e9-92e1-0cef95fc4b22.png)
 6. Select "Load unpacked" in the top left of the settings page
-![](https://user-images.githubusercontent.com/12823489/62582774-64dcab80-b862-11e9-8eb1-b3486187c4ac.png
+![](https://user-images.githubusercontent.com/12823489/62582774-64dcab80-b862-11e9-8eb1-b3486187c4ac.png)
 7. Find the `unpacked` folder within the `StreakSecureGmail-master` folder you downloaded and click select.  
 ![](https://user-images.githubusercontent.com/12823489/62582915-e7fe0180-b862-11e9-8e97-57e663cfdd2f.png)
 
